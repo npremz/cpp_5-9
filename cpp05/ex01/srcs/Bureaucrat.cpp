@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npremont <npremont@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npremont <npremont@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:34:46 by npremont          #+#    #+#             */
-/*   Updated: 2024/12/13 12:27:23 by npremont         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:59:10 by npremont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Bureaucrat.hpp"
+#include "../includes/Form.hpp"
 
 Bureaucrat::Bureaucrat(const std::string name, int grade) : 
     name(name),
@@ -69,12 +70,22 @@ void    Bureaucrat::decrementGrade(int value)
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
-    return ("The grade attribued is too high!");
+    return ("the grade attribued is too high!");
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
-    return ("The grade attribued is too low!");
+    return ("the grade attribued is too low!");
+}
+
+void    Bureaucrat::signForm(Form& target)
+{
+    try {
+        target.beSigned(*this);
+        std::cout << this->getName() << " signed " << target.getName() << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << this->getName() << " couldn't sign " << target.getName() << " because " << e.what() << std::endl;
+    }
 }
 
 std::ostream& operator<<(std::ostream& o, const Bureaucrat& target)

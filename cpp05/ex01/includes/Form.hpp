@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Form.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npremont <npremont@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npremont <npremont@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 15:23:05 by npremont          #+#    #+#             */
-/*   Updated: 2024/12/13 15:41:52 by npremont         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:15:31 by npremont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include <iostream>
 # include <string>
 # include <stdexcept>
-# include "../includes/Bureaucrat.hpp"
+
+class Bureaucrat;
 
 class Form
 {
@@ -35,8 +36,8 @@ class Form
 
         const std::string   getName();
         bool                getIsSigned();
-        const int           getGradeRequiredToSign();
-        const int           getGradeRequiredToExec();
+        int                 getGradeRequiredToSign();
+        int                 getGradeRequiredToExec();
 
         void                beSigned(const Bureaucrat& target);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npremont <npremont@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npremont <npremont@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:34:43 by npremont          #+#    #+#             */
-/*   Updated: 2024/12/13 15:36:04 by npremont         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:11:59 by npremont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include <iostream>
 # include <string>
 # include <stdexcept>
-# include "../includes/Form.hpp"
+
+class Form;
 
 class Bureaucrat 
 {

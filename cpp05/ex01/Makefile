@@ -14,7 +14,7 @@ CFLAGS		:=	-Wall -Wextra -Werror -MMD -MP -pedantic -std=c++98
 #------------------------SOURCE+OBJECT+DEPENDANCE_FILE---------------------------------#
 ########################################################################################
 
-SRC			:=	main.cpp Bureaucrat.cpp
+SRC			:=	main.cpp Bureaucrat.cpp Form.cpp
 
 SRCPATH		:=	./srcs/
 SRCS		:=	$(addprefix $(SRCPATH), $(SRC))
