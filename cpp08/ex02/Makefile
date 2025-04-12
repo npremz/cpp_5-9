@@ -15,7 +15,7 @@ CFLAGS		:=	-Wall -Wextra -Werror -MMD -MP -pedantic -std=c++98
 #------------------------SOURCE+OBJECT+DEPENDANCE_FILE---------------------------------#
 ########################################################################################
 
-SRC			:=	main.cpp MutantStack.cpp
+SRC			:=	main.cpp
 
 SRCPATH		:=	./srcs/
 SRCS		:=	$(addprefix $(SRCPATH), $(SRC))
