@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npremont <npremont@student.s19.be>         +#+  +:+       +#+        */
+/*   By: npremont <npremont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:21:52 by npremont          #+#    #+#             */
-/*   Updated: 2025/03/19 11:15:15 by npremont         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:46:49 by npremont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npremont <npremont@student.s19.be>         +#+  +:+       +#+        */
+/*   By: npremont <npremont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:32:21 by npremont          #+#    #+#             */
-/*   Updated: 2025/03/19 11:36:53 by npremont         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:48:23 by npremont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,24 @@ int main(void)
     }
 
     std::cout << "========================" << std::endl;
+
+    try
+    {
+        pota = new Bureaucrat("Pota", 1);
+        Intern* larbin = new Intern();
+        AForm* form = larbin->makeForm("Robotomy request", "Waf");
+        if (form != NULL)
+        {
+            pota->signForm(*form);
+            pota->executeForm(*form);
+        }
+        delete form;
+        delete pota;
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << "couldn't execute program because: " << e.what() << std::endl;
+    }
 
     try
     {
