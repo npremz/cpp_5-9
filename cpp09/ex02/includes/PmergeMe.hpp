@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npremont <npremont@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npremont <npremont@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 12:56:43 by npremont          #+#    #+#             */
-/*   Updated: 2025/04/16 14:44:51 by npremont         ###   ########.fr       */
+/*   Updated: 2025/04/27 19:23:51 by npremont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,60 +74,99 @@ class PmergeMe {
             return ((pow(2, k + 1) + pow(-1, k)) / 3);
         }
 
-        void insert(C& main, C& pend, C&rest)
+        void insert(C& main, C& pend, C&rest, int order)
         {
+            // si pend vide, on sort
+
+            (void)main;
+            (void)pend;
             (void)rest;
-            typename C::iterator end;
+            (void)order;
 
-            if (pend.size() == 1)
+            if (pend.empty())
+                return;
+
+            C main_upper;
+            C pend_upper;
+            
+            for (typename C::iterator it = main.begin() + order - 1; it < main.end(); it += order)
             {
-                end = std::upper_bound(main.begin(), main.end(), *pend.begin());
-                main.insert(end, *pend.begin());
+                main_upper.push_back(*it);
             }
 
-            if (pend.size() > 1)
+            for (typename C::iterator it = pend.begin() + order - 1; it < pend.end(); it += order)
             {
-                size_t  jc = 3;
-                size_t  idx = 0;
-                size_t  decreased = 0;
-                size_t  count = 0;
+                pend_upper.push_back(*it);
+            }
 
-                while (!pend.empty())
-                {
-                    idx = jacobsthal(jc) - jacobsthal(jc - 1);
+            std::cout << "\t main_u: ";
+            for (typename C::iterator it = main_upper.begin(); it < main_upper.end(); it++)
+            {
+                std::cout << *it << ", ";
+            }
 
-                    if (idx > pend.size())
-                        idx = pend.size();
+            std::cout << "\t pend_u: ";
+            for (typename C::iterator it = pend_upper.begin(); it < pend_upper.end(); it++)
+            {
+                std::cout << *it << ", ";
+            }
 
-                    decreased = 0;
-
-                    while (idx)
-                    {
-                        if (jacobsthal(jc + count) - decreased <= main.size())
-                            end = main.begin() + jacobsthal(jc + count) - decreased;
-                        else
-                            end = main.end();
-                        end = std::upper_bound(main.begin(), end, *(pend.begin() + idx - 1));
-                        main.insert(end, *(pend.begin() + idx - 1));
-                        pend.erase(pend.begin() + idx - 1);
-
-                        idx--;
-                        decreased++;
-                        count++;
-                    }
-                    jc++;
-                }
-
-                for (typename C::iterator it_rest = rest.begin(); !rest.empty();)
-                {
-                    end = std::upper_bound(main.begin(), main.end(), *it_rest);
-                    main.insert(end, *(it_rest));
-                    rest.erase(it_rest);
-                }
-
-                this->container = main;
+            // Definir la valeur jacobsthal
+            int k = 2;
+            while (!pend_upper.empty())
+            {
+                int jc = jacobsthal(k);
+                unsigned int idx = jc - 1;
                 
+                std::cout << "\n\tk: " << k << ", jc: " << jc << std::endl;
+
+                std::cout << "\t main: ";
+
+                for (typename C::iterator it = main.begin(); it < main.end(); it++)
+                {
+                    std::cout << *it << ", ";
+                }
+
+                std::cout << "\n\t pend: ";
+
+                for (typename C::iterator it = pend.begin(); it < pend.end(); it++)
+                {
+                    std::cout << *it << ", ";
+                }
+                std::cout << std::endl;
+
+                if (idx > pend_upper.size())
+                    idx = pend_upper.size();
+                typename C::iterator end = main_upper.end();
+                while (idx)
+                {
+                    if (main_upper.size() < idx * 2 - 1)
+                        end = main_upper.begin() + idx * 2 - 1;
+                    std::cout << "value to upper:" << *(pend_upper.begin() + idx - 1) << std::endl;
+                    std::cout << "value found: " << *std::upper_bound(main_upper.begin(), end, *(pend_upper.begin() + idx - 1)) << std::endl;
+
+                    typename C::iterator ip = std::upper_bound(main_upper.begin(), end, *(pend_upper.begin() + idx - 1));
+                    std::cout << "ip: " << *ip << std::endl;
+                    main_upper.insert(ip, *(pend_upper.begin() + (idx - 1)));
+                    pend_upper.erase(pend_upper.begin() + idx - 1);
+                    idx--;
+                }
+                k++;
             }
+            
+            main.insert(main.end(), rest.begin(), rest.end());
+            rest.clear();
+
+            this->container = main;
+
+            // Inserer en reverse order les [b] a partir du [b] jc
+            // comparer jusqu'au [a] correspondant si pas present, comparer avec tout
+            // comparer l'element le plus grand de la paire (le dernier) avec ceux des autres paires
+
+            // ajouter le reste a la fin de la boucle
+
+
+
         }
 
         void sort(int order = 1)
@@ -215,7 +254,7 @@ class PmergeMe {
             }
 
             if (!pend.empty())
-                insert(main, pend, rest);
+                insert(main, pend, rest, order);
 
             if (DEBUG)
             {
