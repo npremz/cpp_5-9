@@ -6,7 +6,7 @@
 /*   By: npremont <npremont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:11:21 by npremont          #+#    #+#             */
-/*   Updated: 2025/04/16 11:00:07 by npremont         ###   ########.fr       */
+/*   Updated: 2025/05/03 17:43:20 by npremont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int main(int ac, char* av[])
     catch( const std::exception& e)
     {
         std::cerr << "Error: " << e.what() << std::endl;
+        return (1);
     }
 
     return (0);
